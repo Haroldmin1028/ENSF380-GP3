@@ -43,7 +43,7 @@ public class DisasterVictim {
      * @return
      */
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     /**
@@ -59,7 +59,7 @@ public class DisasterVictim {
      * @return
      */
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     /**
@@ -75,7 +75,7 @@ public class DisasterVictim {
      * @return
      */
     public String getDateOfBirth() {
-        return dateOfBirth;
+        return this.dateOfBirth;
     }
 
     /**
@@ -91,7 +91,7 @@ public class DisasterVictim {
      * @return
      */
     public int getAssignedSocialID() {
-        return ASSIGNED_SOCIAL_ID;
+        return this.ASSIGNED_SOCIAL_ID;
     }
 
     /**
@@ -99,7 +99,7 @@ public class DisasterVictim {
      * @return
      */
     public FamilyRelation[] getFamilyConnections() {
-        return familyConnections;
+        return this.familyConnections;
     }
 
     /**
@@ -115,7 +115,7 @@ public class DisasterVictim {
      * @return
      */
     public MedicalRecord[] getMedicalRecords() {
-        return medicalRecords;
+        return this.medicalRecords;
     }
 
     /**
@@ -131,7 +131,7 @@ public class DisasterVictim {
      * @return
      */
     public Supply[] getPersonalBelongings() {
-        return personalBelongings;
+        return this.personalBelongings;
     }
 
     /**
@@ -187,7 +187,7 @@ public class DisasterVictim {
      * @return
      */
     public String getEntryDate() {
-        return ENTRY_DATE;
+        return this.ENTRY_DATE;
     }
 
     /**
@@ -195,7 +195,7 @@ public class DisasterVictim {
      * @return
      */
     public String getComments() {
-        return comments;
+        return this.comments;
     }
 
     /**
@@ -211,7 +211,7 @@ public class DisasterVictim {
      * @return
      */
     public String getGender() {
-        return gender;
+        return this.gender;
     }
 
     /**
