@@ -1,4 +1,5 @@
 package edu.ucalgary.oop;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,6 +14,7 @@ public class Supply {
      * @param quantity
      */
     public Supply(String type, int quantity) {
+
         this.type = type;
         this.quantity = quantity;
     }

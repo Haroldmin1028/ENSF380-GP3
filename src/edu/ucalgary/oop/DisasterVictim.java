@@ -1,4 +1,7 @@
 package edu.ucalgary.oop;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -8,9 +11,9 @@ public class DisasterVictim {
     private String lastName;
     private String dateOfBirth;
     private final int ASSIGNED_SOCIAL_ID;
-    private FamilyRelation[] familyConnections;
-    private MedicalRecord[] medicalRecords;
-    private Supply[] personalBelongings;
+    private ArrayList<FamilyRelation> familyConnections;
+    private ArrayList<MedicalRecord> medicalRecords;
+    private ArrayList<Supply> personalBelongings;
     private final String ENTRY_DATE;
     private String gender;
     private String comments;
@@ -22,8 +25,15 @@ public class DisasterVictim {
      * @param ENTRY_DATE
      */
     public DisasterVictim(String firstName, String ENTRY_DATE) {
+        if (!isValidDateFormat(ENTRY_DATE)) {
+            throw new IllegalArgumentException("Invalid entry date");
+        }
         this.firstName = firstName;
         this.ENTRY_DATE = ENTRY_DATE;
+        this.ASSIGNED_SOCIAL_ID = generateSocialID();
+        this.familyConnections = new ArrayList<>();
+        this.medicalRecords = new ArrayList<>();
+        this.personalBelongings = new ArrayList<>();
     }
 
     /**
@@ -33,9 +43,119 @@ public class DisasterVictim {
      * @param dateOfBirth
      */
     public DisasterVictim(String firstName, String ENTRY_DATE, String dateOfBirth) {
+        if (!isValidDateFormat(ENTRY_DATE)) {
+            throw new IllegalArgumentException("Invalid entry date");
+        }
+        else if (!isValidDateFormat(dateOfBirth)) {
+            throw new IllegalArgumentException("Invalid date of birth");
+        }
         this.firstName = firstName;
         this.ENTRY_DATE = ENTRY_DATE;
         this.dateOfBirth = dateOfBirth;
+        this.ASSIGNED_SOCIAL_ID = generateSocialID();
+        this.familyConnections = new ArrayList<>();
+        this.medicalRecords = new ArrayList<>();
+        this.personalBelongings = new ArrayList<>();
+    }
+
+    /**
+     *
+     * @return
+     */
+    private static int generateSocialID() {
+        counter++;
+        return counter;
+    }
+
+    /**
+     *
+     * @param date
+     * @return
+     */
+    private static boolean isValidDateFormat(String date) {
+        String[] split = date.split("-");
+        if (split.length != 3) {
+            return false;
+        }
+
+        try {
+            int year = Integer.parseInt(split[0]);
+            int month = Integer.parseInt(split[1]);
+            int day = Integer.parseInt(split[2]);
+
+            if (month < 1 || month > 12 || day < 1) {
+                return false;
+            }
+            if (month == 4 || month == 6 || month == 9 || month == 11) {
+                if (day > 30) {
+                    return false;
+                }
+            }
+            else if (month == 2) {
+                if (day > 29) {
+                    return false;
+                }
+            }
+            else {
+                if (day > 31) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
+     *
+     * @param dateStr
+     * @return
+     */
+    private static int convertDateStringToInt(String dateStr) {
+        String combine =  dateStr.replace("-", "");
+        return Integer.parseInt(combine);
+    }
+
+    /**
+     *
+     * @param supply
+     */
+    public void addPersonalBelonging(Supply supply) {
+        personalBelongings.add(supply);
+    }
+
+    /**
+     *
+     * @param unwantedSupply
+     */
+    public void removePersonalBelonging(Supply unwantedSupply) {
+        personalBelongings.remove(unwantedSupply);
+    }
+
+    /**
+     *
+     * @param relation
+     */
+    public void addFamilyConnection(FamilyRelation relation){
+        familyConnections.add(relation);
+    }
+
+    /**
+     *
+     * @param exRelation
+     */
+    public void removeFamilyConnection(FamilyRelation exRelation) {
+        familyConnections.remove(exRelation);
+    }
+
+    /**
+     *
+     * @param record
+     */
+    public void addMedicalRecord(MedicalRecord record){
+        // add
     }
 
     /**
@@ -43,7 +163,7 @@ public class DisasterVictim {
      * @return
      */
     public String getFirstName() {
-        return this.firstName;
+        return firstName;
     }
 
     /**
@@ -59,7 +179,7 @@ public class DisasterVictim {
      * @return
      */
     public String getLastName() {
-        return this.lastName;
+        return lastName;
     }
 
     /**
@@ -75,14 +195,17 @@ public class DisasterVictim {
      * @return
      */
     public String getDateOfBirth() {
-        return this.dateOfBirth;
+        return dateOfBirth;
     }
 
     /**
      *
      * @param dateOfBirth
      */
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) throws IllegalArgumentException{
+        if (!isValidDateFormat(dateOfBirth)) {
+            throw new IllegalArgumentException("Invalid date of birth");
+        }
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -91,7 +214,7 @@ public class DisasterVictim {
      * @return
      */
     public int getAssignedSocialID() {
-        return this.ASSIGNED_SOCIAL_ID;
+        return ASSIGNED_SOCIAL_ID;
     }
 
     /**
@@ -99,13 +222,14 @@ public class DisasterVictim {
      * @return
      */
     public FamilyRelation[] getFamilyConnections() {
-        return this.familyConnections;
+        return familyConnections;
     }
 
     /**
      *
      * @param connections
      */
+    //trying to figure out if they want array or ArrayList
     public void setFamilyConnections(FamilyRelation[] connections) {
         this.familyConnections = connections;
     }
@@ -115,7 +239,7 @@ public class DisasterVictim {
      * @return
      */
     public MedicalRecord[] getMedicalRecords() {
-        return this.medicalRecords;
+        return medicalRecords;
     }
 
     /**
@@ -131,7 +255,7 @@ public class DisasterVictim {
      * @return
      */
     public Supply[] getPersonalBelongings() {
-        return this.personalBelongings;
+        return personalBelongings;
     }
 
     /**
@@ -144,50 +268,10 @@ public class DisasterVictim {
 
     /**
      *
-     * @param supply
-     */
-    public void addPersonalBelonging(Supply supply) {
-        // add
-    }
-
-    /**
-     *
-     * @param unwantedSupply
-     */
-    public void removePersonalBelonging(Supply unwantedSupply) {
-        // remove
-    }
-
-    /**
-     *
-     * @param relation
-     */
-    public void addFamilyConnection(FamilyRelation relation){
-        // add
-    }
-
-    /**
-     *
-     * @param exRelation
-     */
-    public void removeFamilyConnection(FamilyRelation exRelation) {
-        // remove
-    }
-
-    /**
-     *
-     * @param record
-     */
-    public void addMedicalRecord(MedicalRecord record){
-        // add
-    }
-
-    /**
-     *
      * @return
      */
     public String getEntryDate() {
-        return this.ENTRY_DATE;
+        return ENTRY_DATE;
     }
 
     /**
@@ -195,7 +279,7 @@ public class DisasterVictim {
      * @return
      */
     public String getComments() {
-        return this.comments;
+        return comments;
     }
 
     /**
@@ -211,7 +295,7 @@ public class DisasterVictim {
      * @return
      */
     public String getGender() {
-        return this.gender;
+        return gender;
     }
 
     /**
@@ -222,30 +306,5 @@ public class DisasterVictim {
         this.gender = gender;
     }
 
-    /**
-     *
-     * @return
-     */
-    //move bottom 3 functions to top
-    private static int generateSocialID() {
-        // generate
-    }
 
-    /**
-     *
-     * @param date
-     * @return
-     */
-    private static boolean isValidDateFormat(String date) {
-        // check
-    }
-
-    /**
-     *
-     * @param dateStr
-     * @return
-     */
-    private static int convertDateStringToInt(String dateStr) {
-        // convert
-    }
 }
