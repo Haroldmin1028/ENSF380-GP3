@@ -1,7 +1,6 @@
 package edu.ucalgary.oop;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.sql.Array;
+import java.util.*;
 
 /**
  *
@@ -11,9 +10,14 @@ public class DisasterVictim {
     private String lastName;
     private String dateOfBirth;
     private final int ASSIGNED_SOCIAL_ID;
+
     private ArrayList<FamilyRelation> familyConnections;
     private ArrayList<MedicalRecord> medicalRecords;
     private ArrayList<Supply> personalBelongings;
+    //private FamilyRelation[] familyConnections;
+    //private MedicalRecord[] medicalRecords;
+    //private Supply[] personalBelongings;
+
     private final String ENTRY_DATE;
     private String gender;
     private String comments;
@@ -31,9 +35,9 @@ public class DisasterVictim {
         this.firstName = firstName;
         this.ENTRY_DATE = ENTRY_DATE;
         this.ASSIGNED_SOCIAL_ID = generateSocialID();
-        this.familyConnections = new ArrayList<>();
-        this.medicalRecords = new ArrayList<>();
-        this.personalBelongings = new ArrayList<>();
+        this.familyConnections = new ArrayList<FamilyRelation>();
+        this.medicalRecords = new ArrayList<MedicalRecord>();
+        this.personalBelongings = new ArrayList<Supply>();
     }
 
     /**
@@ -53,9 +57,9 @@ public class DisasterVictim {
         this.ENTRY_DATE = ENTRY_DATE;
         this.dateOfBirth = dateOfBirth;
         this.ASSIGNED_SOCIAL_ID = generateSocialID();
-        this.familyConnections = new ArrayList<>();
-        this.medicalRecords = new ArrayList<>();
-        this.personalBelongings = new ArrayList<>();
+        this.familyConnections = new ArrayList<FamilyRelation>();
+        this.medicalRecords = new ArrayList<MedicalRecord>();
+        this.personalBelongings = new ArrayList<Supply>();
     }
 
     /**
@@ -114,7 +118,7 @@ public class DisasterVictim {
      * @return
      */
     private static int convertDateStringToInt(String dateStr) {
-        String combine =  dateStr.replace("-", "");
+        String combine = dateStr.replace("-", "");
         return Integer.parseInt(combine);
     }
 
@@ -155,48 +159,38 @@ public class DisasterVictim {
      * @param record
      */
     public void addMedicalRecord(MedicalRecord record){
-        // add
+        medicalRecords.add(record);
     }
 
     /**
      *
      * @return
      */
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getFirstName() {return firstName;}
 
     /**
      *
      * @param firstName
      */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public void setFirstName(String firstName) {this.firstName = firstName;}
 
     /**
      *
      * @return
      */
-    public String getLastName() {
-        return lastName;
-    }
+    public String getLastName() {return lastName;}
 
     /**
      *
      * @param lastName
      */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public void setLastName(String lastName) {this.lastName = lastName;}
 
     /**
      *
      * @return
      */
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
+    public String getDateOfBirth() {return dateOfBirth;}
 
     /**
      *
@@ -213,25 +207,24 @@ public class DisasterVictim {
      *
      * @return
      */
-    public int getAssignedSocialID() {
-        return ASSIGNED_SOCIAL_ID;
-    }
+    public int getAssignedSocialID() {return ASSIGNED_SOCIAL_ID;}
 
     /**
      *
      * @return
      */
     public FamilyRelation[] getFamilyConnections() {
-        return familyConnections;
+        //return familyConnections;
+        return familyConnections.toArray(new FamilyRelation[0]);
     }
 
     /**
      *
      * @param connections
      */
-    //trying to figure out if they want array or ArrayList
     public void setFamilyConnections(FamilyRelation[] connections) {
-        this.familyConnections = connections;
+        //this.familyConnections = connections;
+        this.familyConnections = new ArrayList<>(Arrays.asList(connections));
     }
 
     /**
@@ -239,7 +232,8 @@ public class DisasterVictim {
      * @return
      */
     public MedicalRecord[] getMedicalRecords() {
-        return medicalRecords;
+        //return medicalRecords;
+        return medicalRecords.toArray(new MedicalRecord[0]);
     }
 
     /**
@@ -247,7 +241,8 @@ public class DisasterVictim {
      * @param records
      */
     public void setMedicalRecords(MedicalRecord[] records) {
-        this.medicalRecords = records;
+        //this.medicalRecords = records;
+        this.medicalRecords = new ArrayList<>(Arrays.asList(records));
     }
 
     /**
@@ -255,7 +250,8 @@ public class DisasterVictim {
      * @return
      */
     public Supply[] getPersonalBelongings() {
-        return personalBelongings;
+        //return personalBelongings;
+        return personalBelongings.toArray(new Supply[0]);
     }
 
     /**
@@ -263,48 +259,37 @@ public class DisasterVictim {
      * @param belongings
      */
     public void setPersonalBelongings(Supply[] belongings) {
-        this.personalBelongings = belongings;
+        //this.personalBelongings = belongings;
+        this.personalBelongings = new ArrayList<>(Arrays.asList(belongings));
     }
 
     /**
      *
      * @return
      */
-    public String getEntryDate() {
-        return ENTRY_DATE;
-    }
+    public String getEntryDate() {return ENTRY_DATE;}
 
     /**
      *
      * @return
      */
-    public String getComments() {
-        return comments;
-    }
+    public String getComments() {return comments;}
 
     /**
      *
      * @param comments
      */
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
+    public void setComments(String comments) {this.comments = comments;}
 
     /**
      *
      * @return
      */
-    public String getGender() {
-        return gender;
-    }
+    public String getGender() {return gender;}
 
     /**
      *
      * @param gender
      */
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-
+    public void setGender(String gender) {this.gender = gender;}
 }
