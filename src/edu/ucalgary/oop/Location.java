@@ -61,15 +61,13 @@ public class Location {
      * @param supply
      */
     public void addSupply(Supply supply) {
-
-
-
-//        Supply[] supplies = new Supply[this.supplies.length + 1];
-//        for (int i = 0; i < this.supplies.length; i++) {
-//            supplies[i] = this.supplies[i];
-//        }
-//        supplies[this.supplies.length] = supply;
-//        this.supplies = supplies;
+        
+        Supply[] supplies = new Supply[this.supplies.length + 1];
+        for (int i = 0; i < this.supplies.length; i++) {
+            supplies[i] = this.supplies[i];
+        }
+        supplies[this.supplies.length] = supply;
+        this.supplies = supplies;
     }
 
     /**
@@ -125,31 +123,34 @@ public class Location {
      *
      * @return
      */
-    public DisasterVictim[] getOccupants() {
-        return occupants;
+    public ArrayList<DisasterVictim> getOccupants() {
+        ArrayList<DisasterVictim> occupantsAsList = new ArrayList<>(Arrays.asList(occupants));
+        return occupantsAsList;
     }
 
     /**
      *
      * @param occupants
      */
-    public void setOccupants(DisasterVictim[] occupants) {
-        this.occupants = occupants;
+    public void setOccupants(ArrayList<DisasterVictim> occupants) {
+        this.occupants = occupants.toArray(new DisasterVictim[0]);
     }
+    
 
     /**
      *
      * @return
      */
-    public Supply[] getSupplies() {
-        return supplies;
+    public ArrayList<Supply> getSupplies() {
+        ArrayList<Supply> suppliesAsList = new ArrayList<>(Arrays.asList(supplies));
+        return suppliesAsList;
     }
 
     /**
      *
      * @param supplies
      */
-    public void setSupplies(Supply[] supplies) {
-        this.supplies = supplies;
+    public void setSupplies(ArrayList<Supply> supplies) {
+        this.supplies = supplies.toArray(new Supply[0]);
     }
 }

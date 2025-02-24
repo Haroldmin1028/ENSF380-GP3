@@ -53,6 +53,11 @@ public class DisasterVictim {
         else if (!isValidDateFormat(dateOfBirth)) {
             throw new IllegalArgumentException("Invalid date of birth");
         }
+
+        if (convertDateStringToInt(dateOfBirth) > convertDateStringToInt(ENTRY_DATE)){
+            throw new IllegalArgumentException("Date of birth cannot come after entry date.");
+        }
+
         this.firstName = firstName;
         this.ENTRY_DATE = ENTRY_DATE;
         this.dateOfBirth = dateOfBirth;

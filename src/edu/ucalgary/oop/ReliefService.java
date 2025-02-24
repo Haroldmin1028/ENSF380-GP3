@@ -71,6 +71,9 @@ public class ReliefService {
      * @param dateOfInquiry
      */
     public void setDateOfInquiry(String dateOfInquiry) {
+        if (!isValidDateFormat(dateOfInquiry)){
+            throw new IllegalArgumentException("Invalid Date");
+        }
         this.dateOfInquiry = dateOfInquiry;
     }
 
@@ -112,7 +115,39 @@ public class ReliefService {
      * @return
      */
     private boolean isValidDateFormat(String date) {
-        return false;
+        String[] split = date.split("-");
+        if (split.length != 3) {
+            return false;
+        }
+
+        try {
+            int year = Integer.parseInt(split[0]);
+            int month = Integer.parseInt(split[1]);
+            int day = Integer.parseInt(split[2]);
+
+            if (month < 1 || month > 12 || day < 1) {
+                return false;
+            }
+            if (month == 4 || month == 6 || month == 9 || month == 11) {
+                if (day > 30) {
+                    return false;
+                }
+            }
+            else if (month == 2) {
+                if (day > 29) {
+                    return false;
+                }
+            }
+            else {
+                if (day > 31) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**
@@ -120,6 +155,10 @@ public class ReliefService {
      * @return
      */
     public String getLogDetails() {
-        return "";
+        String log = ("Inquirer: " + inquirer.getFirstName() + ", Missing Person: " + missingPerson.getFirstName()
+                      + ", Date of Inquiry: " + dateOfInquiry + ", Info Provided: "
+                      +  infoProvided + ", Last Known Location: " + lastKnownLocation.getName());
+        return log;                         
+                                   
     }
 }
