@@ -25,7 +25,7 @@ public class Inquirer {
 
     /**
      *
-     * @return
+     * @return FIRST_NAME
      */
     public String getFirstName() {
         return FIRST_NAME;
@@ -33,7 +33,7 @@ public class Inquirer {
 
     /**
      *
-     * @return
+     * @return LAST_NAME
      */
     public String getLastName() {
         return LAST_NAME;
@@ -41,7 +41,7 @@ public class Inquirer {
 
     /**
      *
-     * @return
+     * @return INFO
      */
     public String getInfo() {
         return INFO;
@@ -49,7 +49,7 @@ public class Inquirer {
 
     /**
      *
-     * @return
+     * @return SERVICES_PHONE
      */
     public String getServicesPhoneNum() {
         return SERVICES_PHONE;

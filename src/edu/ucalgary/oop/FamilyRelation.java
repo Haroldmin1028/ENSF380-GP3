@@ -9,10 +9,10 @@ public class FamilyRelation {
     private String relationshipTo;
 
     /**
-     *
-     * @param personOne
-     * @param relationshipTo
-     * @param personTwo
+     * Constructor to initialize a FamilyRelation with two DisasterVictims and the relationship between them.
+     * @param personOne The first person in the relation
+     * @param relationshipTo The family relation of personOne to personTwo
+     * @param personTwo The second person in the relation
      */
     public FamilyRelation(DisasterVictim personOne, String relationshipTo, DisasterVictim personTwo) {
         this.personOne = personOne;
@@ -21,27 +21,11 @@ public class FamilyRelation {
     }
 
     /**
-     *
-     * @return
+     * Retrieves the first person in the relation.
+     * @return personOne
      */
     public DisasterVictim getPersonOne() {
         return personOne;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public DisasterVictim getPersonTwo() {
-        return personTwo;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getRelationshipTo() {
-        return relationshipTo;
     }
 
     /**
@@ -53,6 +37,14 @@ public class FamilyRelation {
     }
 
     /**
+     * Retrieves the second person in the relation.
+     * @return personTwo
+     */
+    public DisasterVictim getPersonTwo() {
+        return personTwo;
+    }
+
+    /**
      *
      * @param personTwo
      */
@@ -61,7 +53,15 @@ public class FamilyRelation {
     }
 
     /**
-     *
+     * Retrieves the family relationship.
+     * @return relationshipTo
+     */
+    public String getRelationshipTo() {
+        return relationshipTo;
+    }
+
+    /**
+     * Specifies
      * @param relationshipTo
      */
     public void setRelationshipTo(String relationshipTo) {

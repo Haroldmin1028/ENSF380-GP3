@@ -7,27 +7,23 @@ import java.util.*;
 public class Location {
     private String name;
     private String address;
-    // ArrayList<DisasterVictim> occupants;
-    //private ArrayList<Supply> supplies;
     private DisasterVictim[] occupants;
     private Supply[] supplies;
 
     /**
-     *
+     * Constructor to initialize a Location using the name and address of the place
      * @param name
      * @param address
      */
     public Location(String name, String address) {
         this.name = name;
         this.address = address;
-        //this.occupants = new ArrayList<>();
-        //this.supplies = new ArrayList<>();
         this.occupants = new DisasterVictim[0];
         this.supplies = new Supply[0];
     }
 
     /**
-     *
+     * Adds a DisasterVictim to the occupants list
      * @param occupant
      */
     public void addOccupant(DisasterVictim occupant) {
@@ -40,7 +36,7 @@ public class Location {
     }
 
     /**
-     *
+     * Removes a DisasterVictim from the occupants list
      * @param occupant
      */
     public void removeOccupant(DisasterVictim occupant) {
@@ -57,23 +53,21 @@ public class Location {
     }
 
     /**
-     *
+     * Adds a Supply to the supplies list
      * @param supply
      */
     public void addSupply(Supply supply) {
-
-
-
-//        Supply[] supplies = new Supply[this.supplies.length + 1];
-//        for (int i = 0; i < this.supplies.length; i++) {
-//            supplies[i] = this.supplies[i];
-//        }
-//        supplies[this.supplies.length] = supply;
-//        this.supplies = supplies;
+        
+        Supply[] supplies = new Supply[this.supplies.length + 1];
+        for (int i = 0; i < this.supplies.length; i++) {
+            supplies[i] = this.supplies[i];
+        }
+        supplies[this.supplies.length] = supply;
+        this.supplies = supplies;
     }
 
     /**
-     *
+     * Removes a Supply from the supplies list
      * @param supply
      */
     public void removeSupply(Supply supply) {
@@ -91,7 +85,7 @@ public class Location {
 
     /**
      *
-     * @return
+     * @return name
      */
     public String getName() {
         return name;
@@ -107,7 +101,7 @@ public class Location {
 
     /**
      *
-     * @return
+     * @return address
      */
     public String getAddress() {
         return address;
@@ -122,34 +116,37 @@ public class Location {
     }
 
     /**
-     *
-     * @return
+     * Returns the occupants as an ArrayList
+     * @return occupantsAsList
      */
-    public DisasterVictim[] getOccupants() {
-        return occupants;
+    public ArrayList<DisasterVictim> getOccupants() {
+        ArrayList<DisasterVictim> occupantsAsList = new ArrayList<>(Arrays.asList(occupants));
+        return occupantsAsList;
     }
 
     /**
-     *
+     * Sets the occupants using an array
      * @param occupants
      */
-    public void setOccupants(DisasterVictim[] occupants) {
-        this.occupants = occupants;
+    public void setOccupants(ArrayList<DisasterVictim> occupants) {
+        this.occupants = occupants.toArray(new DisasterVictim[0]);
     }
+    
 
     /**
-     *
-     * @return
+     * Returns the supplies as an ArrayList
+     * @return suppliesAsList
      */
-    public Supply[] getSupplies() {
-        return supplies;
+    public ArrayList<Supply> getSupplies() {
+        ArrayList<Supply> suppliesAsList = new ArrayList<>(Arrays.asList(supplies));
+        return suppliesAsList;
     }
 
     /**
-     *
+     * Sets the supplies using an array
      * @param supplies
      */
-    public void setSupplies(Supply[] supplies) {
-        this.supplies = supplies;
+    public void setSupplies(ArrayList<Supply> supplies) {
+        this.supplies = supplies.toArray(new Supply[0]);
     }
 }

@@ -1,5 +1,4 @@
 package edu.ucalgary.oop;
-import java.sql.Array;
 import java.util.*;
 
 /**
@@ -14,9 +13,6 @@ public class DisasterVictim {
     private ArrayList<FamilyRelation> familyConnections;
     private ArrayList<MedicalRecord> medicalRecords;
     private ArrayList<Supply> personalBelongings;
-    //private FamilyRelation[] familyConnections;
-    //private MedicalRecord[] medicalRecords;
-    //private Supply[] personalBelongings;
 
     private final String ENTRY_DATE;
     private String gender;
@@ -27,6 +23,7 @@ public class DisasterVictim {
      *
      * @param firstName
      * @param ENTRY_DATE
+     * @throws IllegalArgumentException if entry date is invalid
      */
     public DisasterVictim(String firstName, String ENTRY_DATE) {
         if (!isValidDateFormat(ENTRY_DATE)) {
@@ -45,6 +42,7 @@ public class DisasterVictim {
      * @param firstName
      * @param ENTRY_DATE
      * @param dateOfBirth
+     * @throws IllegalArgumentException if entry date is invalid, date of birth is invalid, or date of birth is after the entry date
      */
     public DisasterVictim(String firstName, String ENTRY_DATE, String dateOfBirth) {
         if (!isValidDateFormat(ENTRY_DATE)) {
@@ -53,6 +51,11 @@ public class DisasterVictim {
         else if (!isValidDateFormat(dateOfBirth)) {
             throw new IllegalArgumentException("Invalid date of birth");
         }
+
+        if (convertDateStringToInt(dateOfBirth) > convertDateStringToInt(ENTRY_DATE)){
+            throw new IllegalArgumentException("Date of birth cannot come after entry date.");
+        }
+
         this.firstName = firstName;
         this.ENTRY_DATE = ENTRY_DATE;
         this.dateOfBirth = dateOfBirth;
@@ -63,8 +66,8 @@ public class DisasterVictim {
     }
 
     /**
-     *
-     * @return
+     * Creates a unique identifier for each DisasterVictim.
+     * @return counter incremented by 1
      */
     private static int generateSocialID() {
         counter++;
@@ -72,9 +75,9 @@ public class DisasterVictim {
     }
 
     /**
-     *
+     * Checks if the provided date has a valid format.
      * @param date
-     * @return
+     * @return false if invalid date format is detected, else true
      */
     private static boolean isValidDateFormat(String date) {
         String[] split = date.split("-");
@@ -113,9 +116,9 @@ public class DisasterVictim {
     }
 
     /**
-     *
+     * Converts a date with a valid format to an integer.
      * @param dateStr
-     * @return
+     * @return date as an Integer
      */
     private static int convertDateStringToInt(String dateStr) {
         String combine = dateStr.replace("-", "");
@@ -123,7 +126,7 @@ public class DisasterVictim {
     }
 
     /**
-     *
+     * Adds a personal belonging to the list.
      * @param supply
      */
     public void addPersonalBelonging(Supply supply) {
@@ -131,7 +134,7 @@ public class DisasterVictim {
     }
 
     /**
-     *
+     * Removes a personal belonging from the list.
      * @param unwantedSupply
      */
     public void removePersonalBelonging(Supply unwantedSupply) {
@@ -139,7 +142,7 @@ public class DisasterVictim {
     }
 
     /**
-     *
+     * Adds a family relation to the list.
      * @param relation
      */
     public void addFamilyConnection(FamilyRelation relation){
@@ -147,7 +150,7 @@ public class DisasterVictim {
     }
 
     /**
-     *
+     * Removes a family relation from the list.
      * @param exRelation
      */
     public void removeFamilyConnection(FamilyRelation exRelation) {
@@ -155,7 +158,7 @@ public class DisasterVictim {
     }
 
     /**
-     *
+     * Adds a medical record to the list.
      * @param record
      */
     public void addMedicalRecord(MedicalRecord record){
@@ -164,7 +167,7 @@ public class DisasterVictim {
 
     /**
      *
-     * @return
+     * @return firstName
      */
     public String getFirstName() {return firstName;}
 
@@ -176,7 +179,7 @@ public class DisasterVictim {
 
     /**
      *
-     * @return
+     * @return lastName
      */
     public String getLastName() {return lastName;}
 
@@ -188,13 +191,14 @@ public class DisasterVictim {
 
     /**
      *
-     * @return
+     * @return dateOfBirth
      */
     public String getDateOfBirth() {return dateOfBirth;}
 
     /**
-     *
+     * Sets the birthdate if the provided date has a valid format.
      * @param dateOfBirth
+     * @throws IllegalArgumentException if the date has an invalid format
      */
     public void setDateOfBirth(String dateOfBirth) throws IllegalArgumentException{
         if (!isValidDateFormat(dateOfBirth)) {
@@ -205,16 +209,15 @@ public class DisasterVictim {
 
     /**
      *
-     * @return
+     * @return ASSIGNED_SOCIAL_ID
      */
     public int getAssignedSocialID() {return ASSIGNED_SOCIAL_ID;}
 
     /**
      *
-     * @return
+     * @return familyConnections as an array
      */
     public FamilyRelation[] getFamilyConnections() {
-        //return familyConnections;
         return familyConnections.toArray(new FamilyRelation[0]);
     }
 
@@ -223,16 +226,14 @@ public class DisasterVictim {
      * @param connections
      */
     public void setFamilyConnections(FamilyRelation[] connections) {
-        //this.familyConnections = connections;
         this.familyConnections = new ArrayList<>(Arrays.asList(connections));
     }
 
     /**
      *
-     * @return
+     * @return medicalRecords as an array
      */
     public MedicalRecord[] getMedicalRecords() {
-        //return medicalRecords;
         return medicalRecords.toArray(new MedicalRecord[0]);
     }
 
@@ -241,16 +242,14 @@ public class DisasterVictim {
      * @param records
      */
     public void setMedicalRecords(MedicalRecord[] records) {
-        //this.medicalRecords = records;
         this.medicalRecords = new ArrayList<>(Arrays.asList(records));
     }
 
     /**
      *
-     * @return
+     * @return personalBelongings as an array
      */
     public Supply[] getPersonalBelongings() {
-        //return personalBelongings;
         return personalBelongings.toArray(new Supply[0]);
     }
 
@@ -259,19 +258,18 @@ public class DisasterVictim {
      * @param belongings
      */
     public void setPersonalBelongings(Supply[] belongings) {
-        //this.personalBelongings = belongings;
         this.personalBelongings = new ArrayList<>(Arrays.asList(belongings));
     }
 
     /**
      *
-     * @return
+     * @return ENTRY_DATE
      */
     public String getEntryDate() {return ENTRY_DATE;}
 
     /**
      *
-     * @return
+     * @return comments
      */
     public String getComments() {return comments;}
 
@@ -283,7 +281,7 @@ public class DisasterVictim {
 
     /**
      *
-     * @return
+     * @return gender
      */
     public String getGender() {return gender;}
 
